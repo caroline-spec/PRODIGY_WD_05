@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App (Without API Key)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .weather-app {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        .weather-app h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            flex-grow: 1;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .weather-result {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .weather-info p {
+            margin: 10px 0;
+        }
+
+        .error-message {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-app">
+        <h1>Weather App</h1>
+        <form id="weather-form">
+            <input type="text" id="city" name="city" placeholder="Enter city" required>
+            <button type="submit">Get Weather</button>
+        </form>
+        <div id="weather-result" class="weather-result">
+            <h2>Weather Information</h2>
+            <div class="weather-info">
+                <p><strong>City:</strong> <span id="weather-city"></span></p>
+                <p><strong>Temperature:</strong> <span id="weather-temp"></span> °C</p>
+                <p><strong>Condition:</strong> <span id="weather-condition"></span></p>
+            </div>
+        </div>
+        <p id="error-message" class="error-message">City not found. Please enter a valid city.</p>
+    </div>
+
+    <script>
+        // Hardcoded weather data for demonstration
+        const weatherData = {
+            "New York": { temp: 25, condition: "Sunny" },
+            "London": { temp: 18, condition: "Cloudy" },
+            "Tokyo": { temp: 22, condition: "Rainy" },
+            "Sydney": { temp: 28, condition: "Clear" },
+            "Mumbai": { temp: 30, condition: "Humid" },
+            // Add more cities and their corresponding weather data as needed
+        };
+
+        document.getElementById('weather-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const city = document.getElementById('city').value.trim();
+            const data = weatherData[city];
+
+            if (data) {
+                document.getElementById('weather-city').innerText = city;
+                document.getElementById('weather-temp').innerText = data.temp;
+                document.getElementById('weather-condition').innerText = data.condition;
+                document.getElementById('weather-result').style.display = 'block';
+                document.getElementById('error-message').style.display = 'none';
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('weather-result').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
